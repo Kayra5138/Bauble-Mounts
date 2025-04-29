@@ -40,14 +40,16 @@ public abstract class StartRidingMixin {
                     //        return;
                     //    }
                     //}
-                    cir.setReturnValue(false);
-                    CompoundTag entityData = new CompoundTag();
-                    vehicle.save(entityData);
-                    MountRecord mountRecord = new MountRecord(entityData, vehicle.getUUID().toString()); // Объявление компонента в предмет
-                    ItemStack itemStack = itemstack.copy();
-                    itemStack.set(MountComponents.MOUNT_COMPONENTS, mountRecord);
-                    player.setItemInHand(InteractionHand.MAIN_HAND, itemStack);
-                    vehicle.discard();
+                    if (itemstack.is(MountBauble.BAUBLECOMMON)) {
+                        cir.setReturnValue(false);
+                        CompoundTag entityData = new CompoundTag();
+                        vehicle.save(entityData);
+                        MountRecord mountRecord = new MountRecord(entityData, vehicle.getUUID().toString()); // Объявление компонента в предмет
+                        ItemStack itemStack = itemstack.copy();
+                        itemStack.set(MountComponents.MOUNT_COMPONENTS, mountRecord);
+                        player.setItemInHand(InteractionHand.MAIN_HAND, itemStack);
+                        vehicle.discard();
+                    }
                 }
             }
         }
